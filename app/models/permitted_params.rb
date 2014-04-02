@@ -190,7 +190,9 @@ class PermittedParams < Struct.new(:params, :user)
 
   def user_update_as_admin
     if user.admin?
-      permitted_params = params.require(:user).permit(:firstname,
+      permitted_params = params.require(:user).permit(:admin,
+                                                      :login,
+                                                      :firstname,
                                                       :lastname,
                                                       :mail,
                                                       :mail_notification,
