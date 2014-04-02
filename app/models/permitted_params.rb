@@ -184,6 +184,10 @@ class PermittedParams < Struct.new(:params, :user)
 
   alias :update_work_package :new_work_package
 
+  def user_register_via_omniauth
+    params.require(:user).permit(:firstname, :lastname, :mail, :language)
+  end
+
   def user_update_as_admin
     if user.admin?
       permitted_params = params.require(:user).permit(:firstname,
