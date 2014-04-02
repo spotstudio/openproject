@@ -647,7 +647,7 @@ class User < Principal
   # app/modles/permitted_params.rb
   # Delete these if everything in the UsersController uses strong_parameters.
   safe_attributes 'firstname', 'lastname', 'mail', 'mail_notification', 'language',
-                  'custom_field_values', 'custom_fields', 'identity_url'
+                  'custom_field_values', 'custom_fields'
 
   safe_attributes 'auth_source_id', 'force_password_change',
     :if => lambda {|user, current_user| current_user.admin?}

@@ -196,7 +196,6 @@ class PermittedParams < Struct.new(:params, :user)
                                                       :mail_notification,
                                                       :language,
                                                       :custom_fields,
-                                                      :identity_url,
                                                       :auth_source_id,
                                                       :force_password_change,
                                                       :group_ids => [])
