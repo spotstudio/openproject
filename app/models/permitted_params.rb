@@ -481,4 +481,24 @@ class PermittedParams < Struct.new(:params, :current_user)
       :move_to => [ :move_to ]
     }
   end
+
+  private
+  ## Add attributes as permitted attributes (only to be used by the plugins plugin)
+  #
+  # attributes should be given as a Hash in the form
+  # {:model => [:param1, :param2]}
+  def self.add_permitted_attributes(attributes)
+    # Make sure the permitted attributes are cached in @whitelisted_params
+    permitted_attributes
+
+    # Check no unsupported parameters are attempted to be whitelisted (they're ignored)
+    unknown_keys = (attributes.keys - @whitelisted_params.keys)
+    if unknown_keys.size > 0
+      logger.warn("Attempt to whitelist attributes for unknown keys: #{unknown_keys}")
+    end
+
+    attributes.each_pair do |model, attrs|
+      @whitelisted_params[model] += attrs unless unknown_keys.include?(model)
+    end
+  end
 end
